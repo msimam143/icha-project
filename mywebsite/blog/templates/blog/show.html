@@ -1,0 +1,78 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <br>
+    <div class="text-center">
+        <h1>{{halaman}}</h1>
+    </div>
+    <br>
+    <div class="card-group">
+        <div class="card">
+            <img src="https://png.pngtree.com/element_our/20200703/ourmid/pngtree-cartoon-cute-elementary-school-student-reading-image_2299182.jpg"
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{data.judul}}</h5>
+                <p class="card-text">{{data.isi}}</p>
+                <p class="card-text"><small class="text-muted">updated at {{row.tanggal}} - {{row.kategori}}</small></p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <h5 class="card-header">Tinggalkan Komentar</h5>
+        <div class="card-body">
+            {% for pesan in messages %}
+            <div id="index-alert" class="alert alert-{{pesan.tags}} alert-dismissable">
+                <button type="button" class="Close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <b>{{pesan}}</b>
+            </div>
+            {% endfor %}
+            <form method="POST" action="{% url 'blog:show' data.slug %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="disabledTextInput">Email</label>
+                    {{formnya.email}}
+                </div>
+                <div class="form-group">
+                    <label for="disabledTextInput">komen</label>
+                    {{formnya.isi}}
+                    <input type="hidden" name="kode" value="{{data.id}}">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-danger" onclick="history.go(-1)">kembali</button>
+            </form>
+        </div>
+    </div>
+    <ul class="list-unstyled">
+        <li class="media">
+            <img class="mr-3" src="..." alt="Generic placeholder image">
+            <div class="media-body">
+                <h5 class="mt-0 mb-1">List-based media object</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+                odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+        </li>
+        <li class="media my-4">
+            <img class="mr-3" src="..." alt="Generic placeholder image">
+            <div class="media-body">
+                <h5 class="mt-0 mb-1">List-based media object</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+                odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+        </li>
+        <li class="media">
+            <img class="mr-3" src="..." alt="Generic placeholder image">
+            <div class="media-body">
+                <h5 class="mt-0 mb-1">List-based media object</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+                odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+        </li>
+    </ul>
+</div>
+{% endblock content %}
